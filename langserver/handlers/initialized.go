@@ -3,10 +3,10 @@ package handlers
 import (
 	"context"
 
-	"github.com/sourcegraph/go-lsp"
+	"github.com/creachadair/jrpc2"
 )
 
 // Initialized is the callback that runs on the "initialized" method
-func Initialized(ctx context.Context, params lsp.None) error {
+func Initialized(_ context.Context, _ *jrpc2.Request) error {
 	return nil
 }

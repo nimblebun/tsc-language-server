@@ -67,7 +67,6 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 
 	serviceMap := map[string]handler.Func{
 		"initialize": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
-			service.logger.Println("Initialize")
 			err := sess.Init(req)
 			if err != nil {
 				return nil, err

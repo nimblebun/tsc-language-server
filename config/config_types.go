@@ -1,15 +1,15 @@
 package config
 
-// MaxMessageLineLengthConfig specifies the maximum length of a line of text
+// MaxMessageLineLength specifies the maximum length of a line of text
 // with and without portait image
-type MaxMessageLineLengthConfig struct {
+type MaxMessageLineLength struct {
 	Plain    int `json:"plain,omitempty"`
 	Portrait int `json:"portrait,omitempty"`
 }
 
 // SetupConfig contains options for the TSC diagnostics
 type SetupConfig struct {
-	MaxMessageLineLengthConfig `json:"maxMessageLineLengthConfig,omitempty"`
+	MaxMessageLineLength `json:"maxMessageLineLength,omitempty"`
 }
 
 // TSCDefinition is the definition of a TSC command

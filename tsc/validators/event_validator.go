@@ -1,0 +1,45 @@
+package validators
+
+import (
+	"fmt"
+	"regexp"
+
+	"github.com/nimblebun/tsc-language-server/langserver/textdocument"
+	"github.com/nimblebun/tsc-language-server/utils"
+	"github.com/sourcegraph/go-lsp"
+)
+
+func validateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Diagnostic {
+	document := textdocument.From(textDocumentItem)
+
+	// this will match #0000
+	eventPattern := regexp.MustCompile("#(?:[0-9]{4})")
+
+	occurrences := make(map[string]int)
+	diagnostics := []lsp.Diagnostic{}
+
+	for _, match := range eventPattern.FindAllStringSubmatchIndex(text, -1) {
+		from, to := match[0], match[1]
+		event := utils.Substring(text, from, 5)
+
+		if occurrences[event] < 2 {
+			occurrences[event]++
+		}
+
+		if occurrences[event] == 2 {
+			diagnostic := lsp.Diagnostic{
+				Severity: lsp.Error,
+				Range: lsp.Range{
+					Start: document.PositionAt(from),
+					End:   document.PositionAt(to - 1),
+				},
+				Message: fmt.Sprintf("Event %s has already been declared in this file.", event),
+				Source:  "no-event-dup",
+			}
+
+			diagnostics = append(diagnostics, diagnostic)
+		}
+	}
+
+	return diagnostics
+}

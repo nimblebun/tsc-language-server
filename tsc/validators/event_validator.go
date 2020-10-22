@@ -13,12 +13,12 @@ func validateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Di
 	document := textdocument.From(textDocumentItem)
 
 	// this will match #0000
-	eventPattern := regexp.MustCompile("#(?:[0-9]{4})")
+	re := regexp.MustCompile("#(?:[0-9]{4})")
 
 	occurrences := make(map[string]int)
 	diagnostics := []lsp.Diagnostic{}
 
-	for _, match := range eventPattern.FindAllStringSubmatchIndex(text, -1) {
+	for _, match := range re.FindAllStringIndex(text, -1) {
 		from, to := match[0], match[1]
 		event := utils.Substring(text, from, 5)
 

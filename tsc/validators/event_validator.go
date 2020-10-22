@@ -9,7 +9,10 @@ import (
 	"github.com/sourcegraph/go-lsp"
 )
 
-func validateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Diagnostic {
+// ValidateEvents will ensure that the defined events are correct. Currently it
+// checks if an event was re-defined in the same file. Doesn't keep track of
+// global events defined in Head.tsc
+func ValidateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Diagnostic {
 	document := textdocument.From(textDocumentItem)
 
 	// this will match #0000

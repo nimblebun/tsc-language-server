@@ -1,4 +1,4 @@
-package validators
+package validators_test
 
 import "github.com/sourcegraph/go-lsp"
 

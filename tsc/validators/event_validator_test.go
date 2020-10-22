@@ -1,7 +1,9 @@
-package validators
+package validators_test
 
 import (
 	"testing"
+
+	"github.com/nimblebun/tsc-language-server/tsc/validators"
 )
 
 func TestValidateEvents(t *testing.T) {
@@ -31,11 +33,11 @@ func TestValidateEvents(t *testing.T) {
 
 	t.Run("should return empty diagnostics slice when there are no duplicate events", func(t *testing.T) {
 		document := dummyTextDocument(ok)
-		diagnostics := validateEvents(ok, document)
+		diagnostics := validators.ValidateEvents(ok, document)
 
 		if len(diagnostics) != 0 {
 			t.Errorf(
-				"tsc.validators.validateEvents(ok, document) got %v (%v), want %v",
+				"tsc.validators.ValidateEvents(ok, document) got %v (%v), want %v",
 				len(diagnostics),
 				diagnostics,
 				0,
@@ -45,11 +47,11 @@ func TestValidateEvents(t *testing.T) {
 
 	t.Run("should return diagnostics when there are duplicate events", func(t *testing.T) {
 		document := dummyTextDocument(bad)
-		diagnostics := validateEvents(bad, document)
+		diagnostics := validators.ValidateEvents(bad, document)
 
 		if len(diagnostics) != 1 {
 			t.Errorf(
-				"tsc.validators.validateEvents(bad, document) got %v (%v), want %v",
+				"tsc.validators.ValidateEvents(bad, document) got %v (%v), want %v",
 				len(diagnostics),
 				diagnostics,
 				1,

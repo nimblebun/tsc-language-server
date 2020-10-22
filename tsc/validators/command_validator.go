@@ -11,7 +11,11 @@ import (
 	"github.com/sourcegraph/go-lsp"
 )
 
-func validateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *config.Config) []lsp.Diagnostic {
+// ValidateCommands will ensure that the arguments provided to a command are
+// correct. Current criteria include:
+//
+// - Number of arguments must be the same as the number defined in .tscrc.json
+func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *config.Config) []lsp.Diagnostic {
 	document := textdocument.From(textDocumentItem)
 
 	// this will match <ABC, <ABC0000, <ABC0000:0001, <ABC0000:0001:0002, <ABC0000:0001:0002:0003,

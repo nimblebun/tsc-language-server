@@ -3,7 +3,7 @@ package tsc
 import (
 	"testing"
 
-	"github.com/nimblebun/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/config"
 )
 
 func TestGetHoverInfo(t *testing.T) {

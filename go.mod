@@ -1,4 +1,4 @@
-module github.com/nimblebun/tsc-language-server
+module pkg.nimblebun.works/tsc-language-server
 
 go 1.15
 

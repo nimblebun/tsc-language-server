@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nimblebun/tsc-language-server/config"
-	"github.com/nimblebun/tsc-language-server/utils"
+	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/utils"
 )
 
 // GetHoverInfo will retrieve information about an event or a command starting

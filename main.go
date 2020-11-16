@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/nimblebun/tsc-language-server/commands"
 	"github.com/urfave/cli/v2"
+	"pkg.nimblebun.works/tsc-language-server/commands"
 )
 
 func main() {

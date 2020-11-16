@@ -1,8 +1,8 @@
 package validators
 
 import (
-	"github.com/nimblebun/tsc-language-server/config"
 	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
 )
 
 // Validate will return a slice of diagnostics based on the inspection of

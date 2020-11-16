@@ -10,7 +10,7 @@ import (
 	"github.com/creachadair/jrpc2"
 	"github.com/creachadair/jrpc2/code"
 	"github.com/creachadair/jrpc2/handler"
-	"github.com/nimblebun/tsc-language-server/langserver/session"
+	"pkg.nimblebun.works/tsc-language-server/langserver/session"
 )
 
 const requestCancelled code.Code = -32800

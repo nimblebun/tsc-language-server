@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/nimblebun/tsc-language-server/langserver/textdocument"
-	"github.com/nimblebun/tsc-language-server/utils"
 	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
+	"pkg.nimblebun.works/tsc-language-server/utils"
 )
 
 // ValidateEvents will ensure that the defined events are correct. Currently it

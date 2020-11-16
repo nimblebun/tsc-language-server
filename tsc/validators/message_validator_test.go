@@ -3,8 +3,8 @@ package validators_test
 import (
 	"testing"
 
-	"github.com/nimblebun/tsc-language-server/config"
-	"github.com/nimblebun/tsc-language-server/tsc/validators"
+	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/tsc/validators"
 )
 
 func TestValidateMessages(t *testing.T) {

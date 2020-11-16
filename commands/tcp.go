@@ -6,9 +6,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/nimblebun/tsc-language-server/langserver"
-	"github.com/nimblebun/tsc-language-server/langserver/handlers"
 	"github.com/urfave/cli/v2"
+	"pkg.nimblebun.works/tsc-language-server/langserver"
+	"pkg.nimblebun.works/tsc-language-server/langserver/handlers"
 )
 
 // TCPCommand starts the server in stdio mode

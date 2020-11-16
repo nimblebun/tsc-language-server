@@ -11,8 +11,8 @@ import (
 	"github.com/creachadair/jrpc2"
 	"github.com/creachadair/jrpc2/channel"
 	"github.com/creachadair/jrpc2/server"
-	"github.com/nimblebun/tsc-language-server/langserver/instance"
-	"github.com/nimblebun/tsc-language-server/langserver/session"
+	"pkg.nimblebun.works/tsc-language-server/langserver/instance"
+	"pkg.nimblebun.works/tsc-language-server/langserver/session"
 )
 
 // LanguageServer contains definitions of JSON-RPC options, context, and logger

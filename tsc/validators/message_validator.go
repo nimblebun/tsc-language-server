@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/nimblebun/tsc-language-server/config"
-	"github.com/nimblebun/tsc-language-server/langserver/textdocument"
 	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
 )
 
 // ValidateMessages will warn if it notices any text overflow issues in the

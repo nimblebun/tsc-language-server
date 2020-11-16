@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/nimblebun/tsc-language-server/config"
-	"github.com/nimblebun/tsc-language-server/langserver/textdocument"
-	"github.com/nimblebun/tsc-language-server/tsc"
-	"github.com/nimblebun/tsc-language-server/utils"
 	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
+	"pkg.nimblebun.works/tsc-language-server/tsc"
+	"pkg.nimblebun.works/tsc-language-server/utils"
 )
 
 // ValidateCommands will ensure that the arguments provided to a command are

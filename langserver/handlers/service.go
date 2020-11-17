@@ -10,6 +10,10 @@ import (
 	"github.com/creachadair/jrpc2"
 	"github.com/creachadair/jrpc2/code"
 	"github.com/creachadair/jrpc2/handler"
+	"pkg.nimblebun.works/tsc-language-server/config"
+	lsctx "pkg.nimblebun.works/tsc-language-server/langserver/context"
+	"pkg.nimblebun.works/tsc-language-server/langserver/diagnostics"
+	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem"
 	"pkg.nimblebun.works/tsc-language-server/langserver/session"
 )
 
@@ -65,12 +69,20 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 		return nil, fmt.Errorf("Unable to prepare session: %w", err)
 	}
 
+	conf := config.New()
+	diags := diagnostics.NewNotifier(service.sessionCtx, service.logger)
+
+	fs := filesystem.New()
+	fs.SetLogger(service.logger)
+
 	serviceMap := map[string]handler.Func{
 		"initialize": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
 			err := sess.Init(req)
 			if err != nil {
 				return nil, err
 			}
+
+			ctx = lsctx.WithFileSystem(ctx, fs)
 
 			return handle(ctx, req, mh.Initialize)
 		},
@@ -82,6 +94,35 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			}
 
 			return handle(ctx, req, Initialized)
+		},
+
+		"textDocument/didChange": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+			ctx = lsctx.WithDiagnostics(ctx, diags)
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentDidChange)
+		},
+
+		"textDocument/completion": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			return handle(ctx, req, TextDocumentCompletion)
+		},
+
+		"textDocument/hover": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			// err := sess.EnsureInitialized()
+			// if err != nil {
+			// 	return nil, err
+			// }
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentHover)
 		},
 
 		"shutdown": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {

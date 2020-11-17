@@ -10,19 +10,19 @@ import (
 
 // GetHoverInfo will retrieve information about an event or a command starting
 // from a given position
-func GetHoverInfo(str string, at int, config config.Config) string {
+func GetHoverInfo(str string, to int, conf *config.Config) string {
 	if IsEvent(str) {
 		return fmt.Sprintf("Event **%s**", str[:5])
 	}
 
-	commandTokenIdx := strings.LastIndex(str[at:], "<")
+	commandTokenIdx := strings.LastIndex(str[:to], "<")
 
 	if commandTokenIdx == -1 {
 		return ""
 	}
 
 	targetCommand := utils.Substring(str, commandTokenIdx, 4)
-	command, found := config.GetTSCDefinition(targetCommand)
+	command, found := conf.GetTSCDefinition(targetCommand)
 
 	if !found {
 		return ""
@@ -45,7 +45,7 @@ func GetHoverInfo(str string, at int, config config.Config) string {
 		if len(args) == command.Nargs {
 			for i := 0; i < command.Nargs; i++ {
 				arg := args[i]
-				value := config.GetArgumentValue(command, i, arg)
+				value := conf.GetArgumentValue(command, i, arg)
 
 				if arg != value {
 					args[i] = fmt.Sprintf("%s: %s", arg, value)

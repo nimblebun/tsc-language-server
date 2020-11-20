@@ -15,7 +15,7 @@ func TestGetHoverInfo(t *testing.T) {
 	}{
 		{"should return event", "#0069test", 0, "Event **#0069**"},
 		{"should return empty string on nothing", "sue", 1, ""},
-		{"should return empty string on unknwon command", "<SUE0001", 1, ""},
+		{"should return empty string on unknown command", "<SUE0001", 1, ""},
 		{
 			"should return command name and description",
 			"<MNA",

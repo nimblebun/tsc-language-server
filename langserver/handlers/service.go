@@ -110,6 +110,8 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 		},
 
 		"textDocument/completion": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			ctx = lsctx.WithConfig(ctx, &conf)
+
 			return handle(ctx, req, TextDocumentCompletion)
 		},
 

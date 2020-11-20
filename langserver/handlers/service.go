@@ -96,6 +96,30 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			return handle(ctx, req, Initialized)
 		},
 
+		"textDocument/didOpen": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+			ctx = lsctx.WithDiagnostics(ctx, diags)
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentDidOpen)
+		},
+
+		"textDocument/didClose": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentDidClose)
+		},
+
 		"textDocument/didChange": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
 			err := sess.EnsureInitialized()
 			if err != nil {

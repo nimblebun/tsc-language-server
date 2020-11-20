@@ -50,12 +50,14 @@ func ValidateMessages(text string, textDocumentItem lsp.TextDocumentItem, conf *
 				limit = conf.Setup.MaxMessageLineLength.Portrait
 			}
 
+			startPos := strings.Index(message, line)
+
 			if len(cleanLine) > limit {
 				diagnostic := lsp.Diagnostic{
 					Severity: lsp.Warning,
 					Range: lsp.Range{
-						Start: document.PositionAt(from),
-						End:   document.PositionAt(to - 1),
+						Start: document.PositionAt(from + startPos),
+						End:   document.PositionAt(from + startPos + len(line)),
 					},
 					Message: fmt.Sprintf(
 						"Message exceeds %d characters (current length: %d). This may cause text overflow issues.",

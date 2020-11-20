@@ -56,7 +56,7 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 				Severity: lsp.Error,
 				Range: lsp.Range{
 					Start: document.PositionAt(from),
-					End:   document.PositionAt(to - 1),
+					End:   document.PositionAt(to),
 				},
 				Message: fmt.Sprintf(
 					"Too %s arguments provided to %s. Expected %d, got %d.",

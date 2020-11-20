@@ -76,7 +76,7 @@ func (fs *FileSystem) Open(name string) (afero.File, error) {
 
 // Remove will mark the file as closed and then it will remove the file
 // from the pool.
-func (fs *FileSystem) Remove(fh filehandler.FileHandler) error {
+func (fs *FileSystem) Remove(fh *filehandler.FileHandler) error {
 	path, err := fh.FullPath()
 	if err != nil {
 		return err

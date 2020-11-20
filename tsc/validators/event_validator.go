@@ -34,7 +34,7 @@ func ValidateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Di
 				Severity: lsp.Error,
 				Range: lsp.Range{
 					Start: document.PositionAt(from),
-					End:   document.PositionAt(to - 1),
+					End:   document.PositionAt(to),
 				},
 				Message: fmt.Sprintf("Event %s has already been declared in this file.", event),
 				Source:  "no-event-dup",

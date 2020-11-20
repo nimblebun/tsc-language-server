@@ -88,7 +88,7 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 		},
 
 		"initialized": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
-			err := sess.Init(req)
+			err := sess.FinishInitialization(req)
 			if err != nil {
 				return nil, err
 			}
@@ -110,16 +110,21 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 		},
 
 		"textDocument/completion": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
 			ctx = lsctx.WithConfig(ctx, &conf)
 
 			return handle(ctx, req, TextDocumentCompletion)
 		},
 
 		"textDocument/hover": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
-			// err := sess.EnsureInitialized()
-			// if err != nil {
-			// 	return nil, err
-			// }
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
 
 			ctx = lsctx.WithConfig(ctx, &conf)
 			ctx = lsctx.WithFileSystem(ctx, fs)

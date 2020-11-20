@@ -156,6 +156,28 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			return handle(ctx, req, mh.TextDocumentHover)
 		},
 
+		"tsc/setConfig": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+
+			return handle(ctx, req, mh.TSCSetConfig)
+		},
+
+		"tsc/resetConfig": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+
+			return handle(ctx, req, mh.TSCResetConfig)
+		},
+
 		"shutdown": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
 			err := sess.Shutdown(req)
 			if err != nil {

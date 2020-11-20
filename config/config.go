@@ -150,3 +150,8 @@ func (config *Config) Update(newConfigJSON []byte) {
 	json.Unmarshal(newConfigJSON, &newConfig)
 	*config = newConfig
 }
+
+// Reset will replace the current configuration with the default one.
+func (config *Config) Reset() {
+	*config = New()
+}

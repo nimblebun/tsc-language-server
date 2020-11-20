@@ -9,6 +9,8 @@ import (
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/filehandler"
 )
 
+// TextDocumentDidClose is the callback that runs on the "textDocument/didClose"
+// method
 func (mh *MethodHandler) TextDocumentDidClose(ctx context.Context, req *jrpc2.Request) error {
 	var params lsp.DidCloseTextDocumentParams
 	err := req.UnmarshalParams(jrpc2.NonStrict(&params))

@@ -1,12 +1,15 @@
 package filesystem
 
 import (
+	"bytes"
 	"io/ioutil"
 	"log"
 	"os"
 
+	"github.com/sourcegraph/go-lsp"
 	"github.com/spf13/afero"
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/filehandler"
+	"pkg.nimblebun.works/tsc-language-server/utils"
 )
 
 // FileSystem is a file I/O pool that uses afero to create an in-memory and
@@ -64,6 +67,55 @@ func (fs *FileSystem) ReadFile(name string) ([]byte, error) {
 	return buf, err
 }
 
+// Change will update a file with the changes provided by the language client.
+func (fs *FileSystem) Change(handler *filehandler.VersionedFileHandler, changes []lsp.TextDocumentContentChangeEvent) error {
+	if len(changes) == 0 {
+		return nil
+	}
+
+	path, err := handler.FullPath()
+	if err != nil {
+		return err
+	}
+
+	file, err := fs.MemoryFS.OpenFile(path, os.O_RDWR, 0700)
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	var buffer bytes.Buffer
+	_, err = buffer.ReadFrom(file)
+	if err != nil {
+		return err
+	}
+
+	for _, change := range changes {
+		err := fs.applyChange(&buffer, change)
+		if err != nil {
+			return err
+		}
+	}
+
+	err = file.Truncate(0)
+	if err != nil {
+		return err
+	}
+
+	_, err = file.Seek(0, 0)
+	if err != nil {
+		return err
+	}
+
+	_, err = file.Write(buffer.Bytes())
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // Open will open the raw file to perform I/O operations on it.
 func (fs *FileSystem) Open(name string) (afero.File, error) {
 	f, err := fs.MemoryFS.Open(name)
@@ -83,6 +135,49 @@ func (fs *FileSystem) Remove(fh *filehandler.FileHandler) error {
 	}
 
 	err = fs.MemoryFS.Remove(path)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (fs *FileSystem) applyChange(buffer *bytes.Buffer, change lsp.TextDocumentContentChangeEvent) error {
+	if change.Range == nil {
+		buffer.Reset()
+		_, err := buffer.WriteString(change.Text)
+		return err
+	}
+
+	b := buffer.Bytes()
+
+	from := utils.DocumentOffset(b, change.Range.Start)
+	to := utils.DocumentOffset(b, change.Range.End)
+
+	delta := to - from
+	if delta > 0 {
+		buffer.Grow(delta)
+	}
+
+	beforeChange := make([]byte, from, from)
+	copy(beforeChange, buffer.Bytes())
+	afterBytes := buffer.Bytes()[to:]
+	afterChange := make([]byte, len(afterBytes), len(afterBytes))
+	copy(afterChange, afterBytes)
+
+	buffer.Reset()
+
+	_, err := buffer.Write(beforeChange)
+	if err != nil {
+		return err
+	}
+
+	_, err = buffer.WriteString(change.Text)
+	if err != nil {
+		return err
+	}
+
+	_, err = buffer.Write(afterChange)
 	if err != nil {
 		return err
 	}

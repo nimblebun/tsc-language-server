@@ -10,6 +10,8 @@ import (
 	"pkg.nimblebun.works/tsc-language-server/tsc/validators"
 )
 
+// TextDocumentDidOpen is the callback that runs on the "textDocument/didOpen"
+// method
 func (mh *MethodHandler) TextDocumentDidOpen(ctx context.Context, req *jrpc2.Request) error {
 	var params lsp.DidOpenTextDocumentParams
 	err := req.UnmarshalParams(jrpc2.NonStrict(&params))

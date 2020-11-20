@@ -25,7 +25,18 @@ func (mh *MethodHandler) TextDocumentDidChange(ctx context.Context, req *jrpc2.R
 	}
 
 	handler := filehandler.VersionedFileHandlerFromDocument(params.TextDocument)
-	contents, err := fs.ReadFile(handler.URI)
+	path, err := handler.FullPath()
+	if err != nil {
+		return err
+	}
+
+	changes := params.ContentChanges
+	err = fs.Change(handler, changes)
+	if err != nil {
+		return err
+	}
+
+	contents, err := fs.ReadFile(path)
 
 	if err != nil {
 		return err

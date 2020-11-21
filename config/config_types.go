@@ -45,7 +45,7 @@ type Config struct {
 	Maps          GenericConfig `json:"maps,omitempty"`
 	Weapons       GenericConfig `json:"weapons,omitempty"`
 	Items         GenericConfig `json:"items,omitempty"`
-	Equippables   GenericConfig `json:"equippables,omitempty"`
+	Equipables    GenericConfig `json:"equipables,omitempty"`
 	Illustrations GenericConfig `json:"illustrations,omitempty"`
 	Songs         GenericConfig `json:"songs,omitempty"`
 	SFX           GenericConfig `json:"sfx,omitempty"`

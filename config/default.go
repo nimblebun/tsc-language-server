@@ -213,7 +213,7 @@ var DefaultConfig = []byte(`{
       "format": "<EQ+WWWW",
       "insertText": "EQ+${1:0000}",
       "argtype": [
-        "equippable"
+        "equipable"
       ]
     },
     "<EQ-": {
@@ -223,7 +223,7 @@ var DefaultConfig = []byte(`{
       "format": "<EQ-WWWW",
       "insertText": "EQ-${1:0000}",
       "argtype": [
-        "equippable"
+        "equipable"
       ]
     },
     "<ESC": {
@@ -1049,7 +1049,7 @@ var DefaultConfig = []byte(`{
     "0039": "Iron Bond"
   },
 
-  "equippables": {
+  "equipables": {
     "0001": "Booster v0.8",
     "0002": "Map System",
     "0004": "Arms Barrier",

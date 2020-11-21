@@ -62,8 +62,8 @@ func (config *Config) getItem(id string) string {
 	return getGenericItem(id, config.Items[id])
 }
 
-func (config *Config) getEquippable(id string) string {
-	return getGenericItem(id, config.Equippables[id])
+func (config *Config) getEquipable(id string) string {
+	return getGenericItem(id, config.Equipables[id])
 }
 
 func (config *Config) getIllustration(id string) string {
@@ -130,8 +130,8 @@ func (config *Config) GetArgumentValue(definition TSCDefinition, idx int, value 
 		return config.getMap(value)
 	case "item":
 		return config.getItem(value)
-	case "equippable":
-		return config.getEquippable(value)
+	case "equipable":
+		return config.getEquipable(value)
 	case "illustration":
 		return config.getIllustration(value)
 	case "song":

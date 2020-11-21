@@ -116,7 +116,7 @@ func TestGetArgumentValue(t *testing.T) {
 		}
 	})
 
-	t.Run("should return equippable", func(t *testing.T) {
+	t.Run("should return equipable", func(t *testing.T) {
 		val := conf.GetArgumentValue(eqplus, 0, "0004")
 		want := "Arms Barrier"
 

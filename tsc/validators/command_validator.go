@@ -46,9 +46,9 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 			}
 		}
 
-		if argc != command.Nargs {
+		if argc != command.Nargs() {
 			quantity := "few"
-			if argc > command.Nargs {
+			if argc > command.Nargs() {
 				quantity = "many"
 			}
 
@@ -61,8 +61,8 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 				Message: fmt.Sprintf(
 					"Too %s arguments provided to %s. Expected %d, got %d.",
 					quantity,
-					command.Key,
-					command.Nargs,
+					command.Label,
+					command.Nargs(),
 					argc,
 				),
 				Source: "tsc-argc",

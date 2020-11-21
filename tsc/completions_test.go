@@ -33,15 +33,15 @@ func TestGetCompletions(t *testing.T) {
 			t.Errorf("GetCompletions(&conf) @ %s (documentation) got %v, want %v", val.Label, val.Documentation, definition.Documentation)
 		}
 
-		if val.InsertText != definition.InsertText {
-			t.Errorf("GetCompletions(&conf) @ %s (inserttext) got %v, want %v", val.Label, val.InsertText, definition.InsertText)
+		if val.InsertText != definition.GetInsertText() {
+			t.Errorf("GetCompletions(&conf) @ %s (inserttext) got %v, want %v", val.Label, val.InsertText, definition.GetInsertText())
 		}
 
 		if val.Kind != lsp.CIKFunction {
 			t.Errorf("GetCompletions(&conf) @ %s (kind) got %v, want %v", val.Label, val.Kind.String(), lsp.CIKFunction.String())
 		}
 
-		if definition.Nargs > 0 && val.InsertTextFormat != lsp.ITFSnippet {
+		if definition.Nargs() > 0 && val.InsertTextFormat != lsp.ITFSnippet {
 			t.Errorf("GetCompletions(&conf) @ %s *(inserttextformat) got %v, want %v", val.Label, val.InsertTextFormat, lsp.ITFSnippet)
 		}
 	}

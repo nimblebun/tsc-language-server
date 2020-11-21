@@ -99,7 +99,7 @@ func (config *Config) GetArgumentValue(definition TSCDefinition, idx int, value 
 		argtype = definition.ArgType[idx]
 	}
 
-	if definition.Key == "<GIT" {
+	if definition.Label == "<GIT" {
 		if value[0] == '0' {
 			return config.getWeapon(value)
 		}

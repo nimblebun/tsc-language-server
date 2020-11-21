@@ -29,13 +29,11 @@ func TestGetTSCDefinition(t *testing.T) {
 
 	t.Run("should return correct TSC definition", func(t *testing.T) {
 		targetDefinition := TSCDefinition{
-			Key:           "<AM-",
 			Label:         "<AM-",
 			Detail:        "ArMs -",
 			Documentation: "Remove weapon W.",
 			Format:        "<AM-WWWW",
 			InsertText:    "AM-${1:0000}",
-			Nargs:         1,
 			ArgType:       []string{"weapon"},
 		}
 
@@ -46,13 +44,12 @@ func TestGetTSCDefinition(t *testing.T) {
 			t.Errorf("config.Config#GetTSCDefinition(\"<AM-\") second return value, got %v, want %v", found, true)
 		}
 
-		ok = definition.Key == targetDefinition.Key
 		ok = definition.Label == targetDefinition.Label
 		ok = definition.Detail == targetDefinition.Detail
 		ok = definition.Documentation == targetDefinition.Documentation
 		ok = definition.Format == targetDefinition.Format
-		ok = definition.InsertText == targetDefinition.InsertText
-		ok = definition.Nargs == targetDefinition.Nargs
+		ok = definition.GetInsertText() == targetDefinition.InsertText
+		ok = definition.Nargs() == targetDefinition.Nargs()
 		ok = len(definition.ArgType) == len(targetDefinition.ArgType)
 		ok = definition.ArgType[0] == targetDefinition.ArgType[0]
 
@@ -186,13 +183,11 @@ func TestGetArgumentValue(t *testing.T) {
 
 	t.Run("on custom commands", func(t *testing.T) {
 		customCommand := TSCDefinition{
-			Key:           "<HEY",
 			Label:         "<HEY",
 			Detail:        "HEY!",
 			Documentation: "Custom Command",
 			Format:        "<HEYXXXX:YYYY",
 			InsertText:    "HEY${1:0000}:${2:0000}",
-			Nargs:         2,
 			ArgType:       []string{"custom:", "custom:test"},
 		}
 
@@ -233,13 +228,11 @@ func TestUpdate(t *testing.T) {
 
 	"tsc": {
 		"<MIM": {
-      "key": "<MIM",
       "label": "<MIM",
       "detail": "MImiga Mask",
       "documentation": "Give player Mimiga mask X.",
       "format": "<MIMXXXX",
       "insertText": "MIM${1:0000}",
-      "nargs": 1,
       "argtype": [ "number" ]
     }
 	},
@@ -296,10 +289,10 @@ func TestUpdate(t *testing.T) {
 			)
 		}
 
-		if mim.Key != "<MIM" {
+		if mim.Label != "<MIM" {
 			t.Errorf(
 				"config.Config#Update() -> config.Config#GetTSCDefinition(\"<MIM\") `mim` got %v, want %v",
-				mim.Key,
+				mim.Label,
 				"<MIM",
 			)
 		}
@@ -317,6 +310,73 @@ func TestUpdate(t *testing.T) {
 					want,
 				)
 			}
+		}
+	})
+}
+
+func TestNargs(t *testing.T) {
+	t.Run("should return 0 when argtypes is empty/undefined", func(t *testing.T) {
+		def := TSCDefinition{}
+
+		if def.Nargs() != 0 {
+			t.Errorf("config.TSCDefinition#Nargs(): got %v, want %v", def.Nargs(), 0)
+		}
+	})
+
+	t.Run("should return correct number of arguments based on argtypes", func(t *testing.T) {
+		def := TSCDefinition{
+			ArgType: []string{"number", "number"},
+		}
+
+		if def.Nargs() != 2 {
+			t.Errorf("config.TSCDefinition#Nargs(): got %v, want %v", def.Nargs(), 2)
+		}
+	})
+}
+
+func TestGetInsertText(t *testing.T) {
+	t.Run("should return inserttext when provided", func(t *testing.T) {
+		expected := "AME${1:0000}"
+
+		def := TSCDefinition{
+			InsertText: expected,
+		}
+
+		if def.GetInsertText() != expected {
+			t.Errorf("config.TSCDefinition#GetInsertText(): got %v, want %v", def.GetInsertText(), expected)
+		}
+	})
+
+	t.Run("should return empty string when command label is not provided", func(t *testing.T) {
+		def := TSCDefinition{}
+
+		if len(def.GetInsertText()) != 0 {
+			t.Errorf("config.TSCDefinition#GetInsertText(): got length of %v, want 0", len(def.GetInsertText()))
+		}
+	})
+
+	t.Run("should return command when there are no args", func(t *testing.T) {
+		def := TSCDefinition{
+			Label: "<AME",
+		}
+
+		expected := "AME"
+
+		if def.GetInsertText() != expected {
+			t.Errorf("config.TSCDefinition#GetInsertText(): got %v, want %v", def, expected)
+		}
+	})
+
+	t.Run("should generate insert text on the fly", func(t *testing.T) {
+		def := TSCDefinition{
+			Label:   "<AME",
+			ArgType: []string{"number", "number"},
+		}
+
+		expected := "AME${1:0000}:${2:0000}"
+
+		if def.GetInsertText() != expected {
+			t.Errorf("config.TSCDefinition#GetInsertText(): got %v, want %v", def.GetInsertText(), expected)
 		}
 	})
 }

@@ -33,8 +33,8 @@ func GetHoverInfo(str string, to int, conf *config.Config) string {
 	args := []string{}
 	strWithoutCommand := utils.Substring(str, commandTokenIdx+4, 0)
 
-	if command.Nargs > 0 {
-		for i := 0; i < command.Nargs; i++ {
+	if command.Nargs() > 0 {
+		for i := 0; i < command.Nargs(); i++ {
 			arg := utils.Substring(strWithoutCommand, i*5, 4)
 
 			if IsValidArgument(arg) {
@@ -42,8 +42,8 @@ func GetHoverInfo(str string, to int, conf *config.Config) string {
 			}
 		}
 
-		if len(args) == command.Nargs {
-			for i := 0; i < command.Nargs; i++ {
+		if len(args) == command.Nargs() {
+			for i := 0; i < command.Nargs(); i++ {
 				arg := args[i]
 				value := conf.GetArgumentValue(command, i, arg)
 

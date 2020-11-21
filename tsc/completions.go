@@ -19,10 +19,10 @@ func GetCompletions(conf *config.Config) []lsp.CompletionItem {
 			Documentation: def.Documentation,
 			Kind:          lsp.CIKFunction,
 			Data:          idx,
-			InsertText:    def.InsertText,
+			InsertText:    def.GetInsertText(),
 		}
 
-		if def.Nargs > 0 {
+		if def.Nargs() > 0 {
 			item.InsertTextFormat = lsp.ITFSnippet
 		}
 

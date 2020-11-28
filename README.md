@@ -34,9 +34,10 @@ You can start the server in one of two modes:
 ...however, you'd usually want a language client to handle this for you (a
 plugin or configuration in your IDE/editor).
 
-### Current Language Clients/Configurations
+### Editor/IDE Guides
 
-- Visual Studio Code (WIP)
+You can view the instructions for getting started with the TSC Language Server
+in your favorite code editor/IDE in [GUIDES.md][language-client-guides].
 
 ## For Language Client Developers
 
@@ -72,3 +73,4 @@ job!)
 [studio-pixel]: https://studiopixel.jp/
 [nicalis]: https://www.nicalis.com/
 [terraform-ls]: https://github.com/hashicorp/terraform-ls
+[language-client-guides]: https://github.com/nimblebun/tsc-language-server/blob/master/GUIDES.md

@@ -6,7 +6,7 @@ language server implements the [`.tscrc.json` spec][tscrc-spec].
 
 ## Project Overview
 
-The language server is written in the Go programming language and it ships as a
+The language server is written in the Go programming language and ships as a
 standalone binary. Language clients can connect to the server through TCP or
 stdio.
 
@@ -15,13 +15,13 @@ appear here and there.
 
 ## Getting Started
 
-Language clients should normally install the language server for you
-automatically but you can also install it manually. In this case, you have to
+Language clients should usually install the language server for you
+automatically, yet you can also install it manually. In this case, you have to
 keep it up to date yourself, however.
 
 You can download a binary from the [GitHub releases page][releases]. Checksums
 are always attached so you can verify the integrity after download. Placing the
-binary somewhere in your PATH means that language cliens will be able to use it
+binary somewhere in your PATH means that language clients will be able to use it
 without any additional steps.
 
 ## Usage
@@ -31,7 +31,7 @@ You can start the server in one of two modes:
 - Standard I/O mode (by running `tsc-ls start`)
 - TCP mode (by running `tsc-ls tcp`)
 
-...however, you'd normally want a language client to handle this for you (a
+...however, you'd usually want a language client to handle this for you (a
 plugin or configuration in your IDE/editor).
 
 ### Current Language Clients/Configurations

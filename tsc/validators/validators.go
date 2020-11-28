@@ -10,7 +10,7 @@ import (
 func Validate(textDocumentItem lsp.TextDocumentItem, conf *config.Config) []lsp.Diagnostic {
 	text := textDocumentItem.Text
 
-	var diagnostics []lsp.Diagnostic
+	diagnostics := make([]lsp.Diagnostic, 0)
 	diagnostics = append(diagnostics, ValidateCommands(text, textDocumentItem, conf)...)
 	diagnostics = append(diagnostics, ValidateEvents(text, textDocumentItem)...)
 	diagnostics = append(diagnostics, ValidateMessages(text, textDocumentItem, conf)...)

@@ -39,7 +39,7 @@ func publishDiagnostics(docs <-chan DocumentContext, logger *log.Logger) {
 // NewNotifier creates a new Notifier instance for running a goroutine that
 // sends out diagnostics to all documents in the channel.
 func NewNotifier(sessionCtx context.Context, logger *log.Logger) *Notifier {
-	TSCDocs := make(chan DocumentContext, 10)
+	TSCDocs := make(chan DocumentContext, 50)
 	go publishDiagnostics(TSCDocs, logger)
 	return &Notifier{
 		TSCDocs:    TSCDocs,

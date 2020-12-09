@@ -1,15 +1,16 @@
-package tsc
+package tsc_test
 
 import (
 	"testing"
 
 	"github.com/sourcegraph/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
 
 func TestGetCompletions(t *testing.T) {
 	conf := config.New()
-	completions := GetCompletions(&conf)
+	completions := tsc.GetCompletions(&conf)
 
 	definitionsLength := len(conf.GetTSCDefinitions())
 	completionsLength := len(completions)

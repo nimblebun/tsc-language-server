@@ -12,7 +12,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "tsc-ls"
 	app.Usage = "language Server for the TSC scripting language"
-	app.Version = "0.1.2"
+	app.Version = "0.1.3"
 
 	app.Commands = []*cli.Command{
 		{

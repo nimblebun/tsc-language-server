@@ -1,6 +1,10 @@
-package tsc
+package tsc_test
 
-import "testing"
+import (
+	"testing"
+
+	"pkg.nimblebun.works/tsc-language-server/tsc"
+)
 
 func TestIsEvent(t *testing.T) {
 	var tests = []struct {
@@ -16,7 +20,7 @@ func TestIsEvent(t *testing.T) {
 
 	for _, testcase := range tests {
 		t.Run(testcase.name, func(t *testing.T) {
-			got := IsEvent(testcase.str)
+			got := tsc.IsEvent(testcase.str)
 			if got != testcase.want {
 				t.Errorf(
 					"IsEvent(%s) got %v, want %v",
@@ -44,7 +48,7 @@ func TestIsValidArgument(t *testing.T) {
 
 	for _, testcase := range tests {
 		t.Run(testcase.name, func(t *testing.T) {
-			got := IsValidArgument(testcase.str)
+			got := tsc.IsValidArgument(testcase.str)
 			if got != testcase.want {
 				t.Errorf(
 					"IsValidArgument(%s) got %v, want %v",

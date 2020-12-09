@@ -15,7 +15,7 @@ func TextDocumentCompletion(ctx context.Context, _ *jrpc2.Request) ([]lsp.Comple
 	conf, err := lsctx.Config(ctx)
 
 	if err != nil {
-		return []lsp.CompletionItem{}, nil
+		return []lsp.CompletionItem{}, err
 	}
 
 	completions := tsc.GetCompletions(conf)

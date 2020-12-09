@@ -1,9 +1,10 @@
-package tsc
+package tsc_test
 
 import (
 	"testing"
 
 	"pkg.nimblebun.works/tsc-language-server/config"
+	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
 
 func TestGetHoverInfo(t *testing.T) {
@@ -41,7 +42,7 @@ Travel to map W, run event X, and move the PC to coordinates Y:Z.
 
 	for _, testcase := range tests {
 		t.Run(testcase.name, func(t *testing.T) {
-			got := GetHoverInfo(testcase.str, testcase.at, &c)
+			got := tsc.GetHoverInfo(testcase.str, testcase.at, &c)
 			if got != testcase.want {
 				t.Errorf(
 					"GetHoverInfo(%s, %d, c) got %v, want %v",

@@ -13,6 +13,16 @@ stdio.
 Please note that this language server is currently not 100% stable, so bugs may
 appear here and there.
 
+## Features
+
+- Hover information
+- Diagnostics
+  - Event duplication checking
+  - Command usage validation
+  - Message box text overflow checking
+- Completions
+- Event folding
+
 ## Getting Started
 
 Language clients should usually install the language server for you

@@ -156,6 +156,17 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			return handle(ctx, req, mh.TextDocumentHover)
 		},
 
+		"textDocument/foldingRange": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentFoldingRange)
+		},
+
 		"tsc/setConfig": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
 			err := sess.EnsureInitialized()
 			if err != nil {

@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/sourcegraph/go-lsp"
 	"github.com/spf13/afero"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/filehandler"
 	"pkg.nimblebun.works/tsc-language-server/utils"
 )

@@ -1,6 +1,6 @@
 package validators_test
 
-import "github.com/sourcegraph/go-lsp"
+import "pkg.nimblebun.works/go-lsp"
 
 func dummyTextDocument(input string) lsp.TextDocumentItem {
 	return lsp.TextDocumentItem{

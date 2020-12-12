@@ -3,7 +3,7 @@ package tsc_test
 import (
 	"testing"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
 
@@ -56,7 +56,7 @@ SHUTTER NO. 4<NOD<END`
 
 	t.Run("should return correct ranges", func(t *testing.T) {
 		ranges := tsc.GetFoldingRanges(dummyDocument)
-		expectedRanges := []tsc.FoldingRange{
+		expectedRanges := []lsp.FoldingRange{
 			{
 				StartLine:      0,
 				StartCharacter: 0,

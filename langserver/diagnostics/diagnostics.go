@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/creachadair/jrpc2"
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 )
 
 // DocumentContext contains data about the document on which we have performed

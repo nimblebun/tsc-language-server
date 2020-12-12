@@ -3,7 +3,7 @@ package handlers
 import (
 	"context"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	lsctx "pkg.nimblebun.works/tsc-language-server/langserver/context"
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/filehandler"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
@@ -67,7 +67,10 @@ func (mh *MethodHandler) TextDocumentHover(ctx context.Context, params lsp.TextD
 	info := tsc.GetHoverInfo(text, offset-startOffset, config)
 
 	if len(info) > 0 {
-		result.Contents = append(result.Contents, lsp.RawMarkedString(info))
+		result.Contents = lsp.MarkupContent{
+			Kind:  lsp.MKMarkdown,
+			Value: info,
+		}
 	}
 
 	return result, nil

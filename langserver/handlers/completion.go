@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/creachadair/jrpc2"
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	lsctx "pkg.nimblebun.works/tsc-language-server/langserver/context"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
 )

@@ -1,7 +1,7 @@
 package filesystem
 
 import (
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/filehandler"
 )
 

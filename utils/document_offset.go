@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/sourcegraph/go-lsp"
+import "pkg.nimblebun.works/go-lsp"
 
 // DocumentOffset is a utility function used to turn an LSP cursor position into
 // an offset from the current file buffer.

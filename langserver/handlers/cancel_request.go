@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/creachadair/jrpc2"
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 )
 
 // CancelRequest will be called on "$/cancelRequest"
@@ -16,7 +16,7 @@ func CancelRequest(ctx context.Context, req *jrpc2.Request) error {
 		return err
 	}
 
-	id := params.ID.Str
+	id := params.ID.String()
 	jrpc2.CancelRequest(ctx, id)
 	return nil
 }

@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/langserver/filesystem/uri"
 )
 

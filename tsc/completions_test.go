@@ -3,7 +3,7 @@ package tsc_test
 import (
 	"testing"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
@@ -30,7 +30,7 @@ func TestGetCompletions(t *testing.T) {
 			t.Errorf("GetCompletions(&conf) @ %s (detail) got %v, want %v", val.Label, val.Detail, definition.Detail)
 		}
 
-		if val.Documentation != definition.Documentation {
+		if val.Documentation.Value != definition.Documentation {
 			t.Errorf("GetCompletions(&conf) @ %s (documentation) got %v, want %v", val.Label, val.Documentation, definition.Documentation)
 		}
 

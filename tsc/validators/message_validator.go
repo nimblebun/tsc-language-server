@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
 )
@@ -54,7 +54,7 @@ func ValidateMessages(text string, textDocumentItem lsp.TextDocumentItem, conf *
 
 			if len(cleanLine) > limit {
 				diagnostic := lsp.Diagnostic{
-					Severity: lsp.Warning,
+					Severity: lsp.DSWarning,
 					Range: lsp.Range{
 						Start: document.PositionAt(from + startPos),
 						End:   document.PositionAt(from + startPos + len(line)),

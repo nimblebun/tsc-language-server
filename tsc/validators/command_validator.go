@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
@@ -53,7 +53,7 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 			}
 
 			diagnostic := lsp.Diagnostic{
-				Severity: lsp.Error,
+				Severity: lsp.DSError,
 				Range: lsp.Range{
 					Start: document.PositionAt(from),
 					End:   document.PositionAt(to),

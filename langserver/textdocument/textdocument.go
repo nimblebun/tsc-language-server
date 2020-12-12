@@ -7,7 +7,7 @@ package textdocument
 import (
 	"math"
 
-	"github.com/sourcegraph/go-lsp"
+	"pkg.nimblebun.works/go-lsp"
 )
 
 // TextDocument is a struct that extends the lsp.TextDocumentItem struct with

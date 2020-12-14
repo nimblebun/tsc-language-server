@@ -4,6 +4,8 @@ A language server made for the TSC scripting format used in games such as Cave
 Story. It aims to be small, performant, and completely editor-agnostic. The
 language server implements the [`.tscrc.json` spec][tscrc-spec].
 
+![Diagram explaining how the language server works](.github/assets/diagram.png)
+
 ## Project Overview
 
 The language server is written in the Go programming language and ships as a

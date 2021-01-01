@@ -144,16 +144,15 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			return handle(ctx, req, TextDocumentCompletion)
 		},
 
-		"textDocument/hover": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+		"textDocument/documentSymbol": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
 			err := sess.EnsureInitialized()
 			if err != nil {
 				return nil, err
 			}
 
-			ctx = lsctx.WithConfig(ctx, &conf)
 			ctx = lsctx.WithFileSystem(ctx, fs)
 
-			return handle(ctx, req, mh.TextDocumentHover)
+			return handle(ctx, req, mh.TextDocumentSymbol)
 		},
 
 		"textDocument/foldingRange": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
@@ -165,6 +164,18 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			ctx = lsctx.WithFileSystem(ctx, fs)
 
 			return handle(ctx, req, mh.TextDocumentFoldingRange)
+		},
+
+		"textDocument/hover": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {
+			err := sess.EnsureInitialized()
+			if err != nil {
+				return nil, err
+			}
+
+			ctx = lsctx.WithConfig(ctx, &conf)
+			ctx = lsctx.WithFileSystem(ctx, fs)
+
+			return handle(ctx, req, mh.TextDocumentHover)
 		},
 
 		"tsc/setConfig": func(ctx context.Context, req *jrpc2.Request) (interface{}, error) {

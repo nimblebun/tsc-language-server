@@ -18,8 +18,9 @@ func (mh *MethodHandler) Initialize(ctx context.Context, _ *jrpc2.Request) (lsp.
 			CompletionProvider: &lsp.CompletionOptions{
 				ResolveProvider: false,
 			},
-			HoverProvider:        &lsp.HoverOptions{},
-			FoldingRangeProvider: &lsp.FoldingRangeRegistrationOptions{},
+			HoverProvider:          &lsp.HoverOptions{},
+			FoldingRangeProvider:   &lsp.FoldingRangeRegistrationOptions{},
+			DocumentSymbolProvider: &lsp.DocumentSymbolRegistrationOptions{},
 		},
 	}
 

@@ -24,6 +24,7 @@ appear here and there.
   - Message box text overflow checking
 - Completions
 - Event folding
+- Event symbols (outline + go to event)
 
 ## Getting Started
 
@@ -63,10 +64,17 @@ handler
 handler and sends error/warning diagnostics to the client
 - `textDocument/completion` - sends a list of TSC commands that can be used from
 within the editor's autocompletion feature
+- `textDocument/documentSymbol` - sends a list of TSC events that can be found
+in the opened file
+- `textDocument/foldingRange` - sends a list of event ranges that can be used
+for folding
 - `textDocument/hover` - provides hover information for commands and events
 - `tsc/setConfig` - updates the LSP's default configuration with overrides from
 the workspace's `.tscrc.json` file
 - `tsc/resetConfig` - reverts to the LSP's built-in (standard) TSC configuration
+
+Additionally, some required methods are also exposed, such as `initialize`,
+`initialized`, `shutdown`, `exit`, and `$/cancelRequest`.
 
 ## Credits
 

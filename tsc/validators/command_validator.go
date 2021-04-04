@@ -22,6 +22,12 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 	// <ABC0000?0001, <ABC0000 0001b0002, <ABC0000$0001\0002^0003, <FAOV100, <FLJV020:V102
 	re := regexp.MustCompile("<(([A-Z0-9+-]){3}(([0-9V])([0-9]){3})?)((.([0-9V])([0-9]){3})?){0,3}")
 
+	if conf.Setup.LooseChecking.Arguments {
+		// this will match <ABC, <ABC04BQ, <ABC04KB:0-32, etc. The separator is
+		// strictly : in this scenario.
+		re = regexp.MustCompile("<(([A-Z0-9+-]){3}((.){4})?)((:(.){4})?){0,3}")
+	}
+
 	diagnostics := []lsp.Diagnostic{}
 
 	for _, match := range re.FindAllStringIndex(text, -1) {
@@ -41,7 +47,7 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 		for i := 0; i < len(inputWithoutCommand); i++ {
 			arg := utils.Substring(inputWithoutCommand, i*5, 4)
 
-			if tsc.IsValidArgument(arg) {
+			if tsc.IsValidArgument(arg, conf.Setup.LooseChecking.Arguments) {
 				argc++
 			}
 		}

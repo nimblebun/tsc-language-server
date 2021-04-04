@@ -73,4 +73,22 @@ func TestValidateCommands(t *testing.T) {
 			)
 		}
 	})
+
+	t.Run("should handle loose cases properly", func(t *testing.T) {
+		conf := config.New()
+		conf.Setup.LooseChecking.Arguments = true
+
+		command := "<EVE0-B2"
+
+		document := dummyTextDocument(command)
+		diagnostics := validators.ValidateCommands(command, document, &conf)
+
+		if len(diagnostics) != 0 {
+			t.Errorf(
+				"tsc.validators.ValidateCommands(command, document, &conf) -> len (LOOSE) got %v, want %v",
+				len(diagnostics),
+				0,
+			)
+		}
+	})
 }

@@ -12,7 +12,7 @@ func Validate(textDocumentItem lsp.TextDocumentItem, conf *config.Config) []lsp.
 
 	diagnostics := make([]lsp.Diagnostic, 0)
 	diagnostics = append(diagnostics, ValidateCommands(text, textDocumentItem, conf)...)
-	diagnostics = append(diagnostics, ValidateEvents(text, textDocumentItem)...)
+	diagnostics = append(diagnostics, ValidateEvents(text, textDocumentItem, conf)...)
 	diagnostics = append(diagnostics, ValidateMessages(text, textDocumentItem, conf)...)
 	return diagnostics
 }

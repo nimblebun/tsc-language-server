@@ -12,9 +12,18 @@ type MaxMessageLineLength struct {
 	Portrait int `json:"portrait,omitempty"`
 }
 
+// LooseChecking specifies whether the language server should perform checks on
+// event IDs and arguments in a loosely fashion. For more information, see:
+// https://docs.nimblebun.works/tscrc-json#setup-loose-checking
+type LooseChecking struct {
+	Events    bool `json:"events,omitempty"`
+	Arguments bool `json:"arguments,omitempty"`
+}
+
 // SetupConfig contains options for the TSC diagnostics
 type SetupConfig struct {
-	MaxMessageLineLength `json:"maxMessageLineLength,omitempty"`
+	MaxMessageLineLength MaxMessageLineLength `json:"maxMessageLineLength,omitempty"`
+	LooseChecking        LooseChecking        `json:"looseChecking,omitempty"`
 }
 
 // TSCDefinition is the definition of a TSC command

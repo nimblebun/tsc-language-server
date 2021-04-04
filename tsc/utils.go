@@ -3,7 +3,7 @@ package tsc
 import "strconv"
 
 // IsEvent checks whether the text hovered over is an event (#0000, #1234, etc.)
-func IsEvent(str string) bool {
+func IsEvent(str string, loose bool) bool {
 	// Events are 5 characters long (# and 4 digits)
 	if len(str) < 5 {
 		return false
@@ -14,6 +14,10 @@ func IsEvent(str string) bool {
 		return false
 	}
 
+	if loose {
+		return true
+	}
+
 	// The 4 characters after the # must be valid integers
 	_, err := strconv.Atoi(str[1:5])
 	return err == nil
@@ -21,10 +25,14 @@ func IsEvent(str string) bool {
 
 // IsValidArgument checks whether the provided argument is valid (4 digits or
 // 'V' and 3 digits)
-func IsValidArgument(arg string) bool {
+func IsValidArgument(arg string, loose bool) bool {
 	// Arguments are always 4 characters long
 	if len(arg) != 4 {
 		return false
+	}
+
+	if loose {
+		return true
 	}
 
 	// Arguments are either valid integers or start with V

@@ -162,6 +162,7 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 			}
 
 			ctx = lsctx.WithFileSystem(ctx, fs)
+			ctx = lsctx.WithConfig(ctx, &conf)
 
 			return handle(ctx, req, mh.TextDocumentFoldingRange)
 		},

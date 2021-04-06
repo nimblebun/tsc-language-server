@@ -26,6 +26,8 @@ func (mh *MethodHandler) TextDocumentSymbol(ctx context.Context, req *jrpc2.Requ
 		return symbols, err
 	}
 
+	config, err := lsctx.Config(ctx)
+
 	handler := filehandler.FromDocumentURI(params.TextDocument.URI)
 
 	path, err := handler.FullPath()
@@ -46,7 +48,7 @@ func (mh *MethodHandler) TextDocumentSymbol(ctx context.Context, req *jrpc2.Requ
 		Text:       contents,
 	}
 
-	symbols = tsc.GetEventSymbols(contents, doc)
+	symbols = tsc.GetEventSymbols(contents, doc, config)
 
 	return symbols, nil
 }

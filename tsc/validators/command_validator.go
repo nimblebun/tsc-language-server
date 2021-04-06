@@ -52,7 +52,7 @@ func ValidateCommands(text string, textDocumentItem lsp.TextDocumentItem, conf *
 			}
 		}
 
-		if argc != command.Nargs() {
+		if argc < command.Nargs() || (!conf.Setup.LooseChecking.Arguments && argc > command.Nargs()) {
 			quantity := "few"
 			if argc > command.Nargs() {
 				quantity = "many"

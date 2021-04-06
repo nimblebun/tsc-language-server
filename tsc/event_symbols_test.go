@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"pkg.nimblebun.works/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
 
@@ -23,7 +24,9 @@ func TestGetEventSymbols(t *testing.T) {
 		Text: text,
 	}
 
-	symbols := tsc.GetEventSymbols(text, document)
+	conf := config.New()
+
+	symbols := tsc.GetEventSymbols(text, document, &conf)
 
 	t.Run("should return correct number of symbols", func(t *testing.T) {
 		if len(symbols) != 5 {

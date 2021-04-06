@@ -3,10 +3,13 @@ package validators_test
 import (
 	"testing"
 
+	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/tsc/validators"
 )
 
 func TestValidateEvents(t *testing.T) {
+	conf := config.New()
+
 	const ok = `#0090
 <MNA<FL-0263<CMU0002<FAI0000<END
 #0091
@@ -33,7 +36,7 @@ func TestValidateEvents(t *testing.T) {
 
 	t.Run("should return empty diagnostics slice when there are no duplicate events", func(t *testing.T) {
 		document := dummyTextDocument(ok)
-		diagnostics := validators.ValidateEvents(ok, document)
+		diagnostics := validators.ValidateEvents(ok, document, &conf)
 
 		if len(diagnostics) != 0 {
 			t.Errorf(
@@ -47,7 +50,7 @@ func TestValidateEvents(t *testing.T) {
 
 	t.Run("should return diagnostics when there are duplicate events", func(t *testing.T) {
 		document := dummyTextDocument(bad)
-		diagnostics := validators.ValidateEvents(bad, document)
+		diagnostics := validators.ValidateEvents(bad, document, &conf)
 
 		if len(diagnostics) != 1 {
 			t.Errorf(

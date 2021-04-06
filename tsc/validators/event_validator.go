@@ -5,6 +5,7 @@ import (
 	"regexp"
 
 	"pkg.nimblebun.works/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/langserver/textdocument"
 	"pkg.nimblebun.works/tsc-language-server/utils"
 )
@@ -12,11 +13,16 @@ import (
 // ValidateEvents will ensure that the defined events are correct. Currently it
 // checks if an event was re-defined in the same file. Doesn't keep track of
 // global events defined in Head.tsc
-func ValidateEvents(text string, textDocumentItem lsp.TextDocumentItem) []lsp.Diagnostic {
+func ValidateEvents(text string, textDocumentItem lsp.TextDocumentItem, conf *config.Config) []lsp.Diagnostic {
 	document := textdocument.From(textDocumentItem)
 
 	// this will match #0000
 	re := regexp.MustCompile("#(?:[0-9]{4})")
+
+	if conf.Setup.LooseChecking.Events {
+		// this will match #0000, #0ABC
+		re = regexp.MustCompile("#(?:.{4})")
+	}
 
 	occurrences := make(map[string]int)
 	diagnostics := []lsp.Diagnostic{}

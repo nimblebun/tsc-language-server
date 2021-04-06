@@ -223,6 +223,10 @@ func TestUpdate(t *testing.T) {
 	"setup": {
 		"maxMessageLineLength": {
 			"portrait": 30
+		},
+
+		"looseChecking": {
+			"arguments": true
 		}
 	},
 
@@ -276,6 +280,14 @@ func TestUpdate(t *testing.T) {
 				"config.Config#Update() -> Setup.MaxMessageLineLength.Portrait got %v, want %v",
 				conf.Setup.MaxMessageLineLength.Portrait,
 				30,
+			)
+		}
+
+		if conf.Setup.LooseChecking.Arguments != true {
+			t.Errorf(
+				"config.Config#Update() -> Setup.LooseChecking.Arguments got %v, want %v",
+				conf.Setup.LooseChecking.Arguments,
+				true,
 			)
 		}
 

@@ -11,7 +11,7 @@ import (
 // GetHoverInfo will retrieve information about an event or a command starting
 // from a given position
 func GetHoverInfo(str string, to int, conf *config.Config) string {
-	if IsEvent(str) {
+	if IsEvent(str, conf.Setup.LooseChecking.Events) {
 		return fmt.Sprintf("Event **%s**", str[:5])
 	}
 
@@ -37,7 +37,7 @@ func GetHoverInfo(str string, to int, conf *config.Config) string {
 		for i := 0; i < command.Nargs(); i++ {
 			arg := utils.Substring(strWithoutCommand, i*5, 4)
 
-			if IsValidArgument(arg) {
+			if IsValidArgument(arg, conf.Setup.LooseChecking.Arguments) {
 				args = append(args, arg)
 			}
 		}

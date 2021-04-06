@@ -4,10 +4,13 @@ import (
 	"testing"
 
 	"pkg.nimblebun.works/go-lsp"
+	"pkg.nimblebun.works/tsc-language-server/config"
 	"pkg.nimblebun.works/tsc-language-server/tsc"
 )
 
 func TestGetFoldingRanges(t *testing.T) {
+	conf := config.New()
+
 	dummyData := `#0098
 <CNP0306:0117:0000<ANP0306:0032:0002<END
 
@@ -45,7 +48,7 @@ SHUTTER NO. 4<NOD<END`
 	}
 
 	t.Run("should return correct number of folding ranges", func(t *testing.T) {
-		ranges := tsc.GetFoldingRanges(dummyDocument)
+		ranges := tsc.GetFoldingRanges(dummyDocument, &conf)
 		actual := len(ranges)
 		expected := 4
 
@@ -55,7 +58,7 @@ SHUTTER NO. 4<NOD<END`
 	})
 
 	t.Run("should return correct ranges", func(t *testing.T) {
-		ranges := tsc.GetFoldingRanges(dummyDocument)
+		ranges := tsc.GetFoldingRanges(dummyDocument, &conf)
 		expectedRanges := []lsp.FoldingRange{
 			{
 				StartLine:      0,

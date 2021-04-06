@@ -24,6 +24,11 @@ func (mh *MethodHandler) TextDocumentFoldingRange(ctx context.Context, req *jrpc
 		return []lsp.FoldingRange{}, err
 	}
 
+	config, err := lsctx.Config(ctx)
+	if err != nil {
+		return []lsp.FoldingRange{}, err
+	}
+
 	handler := filehandler.FromDocumentURI(params.TextDocument.URI)
 	path, err := handler.FullPath()
 	if err != nil {
@@ -41,6 +46,6 @@ func (mh *MethodHandler) TextDocumentFoldingRange(ctx context.Context, req *jrpc
 		Text:       string(contents),
 	}
 
-	ranges := tsc.GetFoldingRanges(doc)
+	ranges := tsc.GetFoldingRanges(doc, config)
 	return ranges, nil
 }

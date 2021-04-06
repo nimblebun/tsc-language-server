@@ -10,6 +10,11 @@ var DefaultConfig = []byte(`{
     "maxMessageLineLength": {
       "plain": 35,
       "portrait": 28
+    },
+
+    "looseChecking": {
+      "events": false,
+      "arguments": false
     }
   },
 

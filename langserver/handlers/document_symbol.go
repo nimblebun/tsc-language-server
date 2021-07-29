@@ -16,7 +16,7 @@ func (mh *MethodHandler) TextDocumentSymbol(ctx context.Context, req *jrpc2.Requ
 	var symbols []lsp.DocumentSymbol
 
 	var params lsp.DocumentSymbolParams
-	err := req.UnmarshalParams(jrpc2.NonStrict(&params))
+	err := req.UnmarshalParams(&params)
 	if err != nil {
 		return symbols, err
 	}

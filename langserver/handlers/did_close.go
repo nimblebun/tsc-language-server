@@ -13,7 +13,7 @@ import (
 // method
 func (mh *MethodHandler) TextDocumentDidClose(ctx context.Context, req *jrpc2.Request) error {
 	var params lsp.DidCloseTextDocumentParams
-	err := req.UnmarshalParams(jrpc2.NonStrict(&params))
+	err := req.UnmarshalParams(&params)
 	if err != nil {
 		return err
 	}

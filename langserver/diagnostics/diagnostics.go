@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/creachadair/jrpc2"
-	"pkg.nimblebun.works/go-lsp"
+	lsp "pkg.nimblebun.works/go-lsp"
 )
 
 // DocumentContext contains data about the document on which we have performed
@@ -27,7 +27,8 @@ type Notifier struct {
 
 func publishDiagnostics(docs <-chan DocumentContext, logger *log.Logger) {
 	for doc := range docs {
-		if err := jrpc2.PushNotify(doc.Ctx, "textDocument/publishDiagnostics", lsp.PublishDiagnosticsParams{
+		srv := jrpc2.ServerFromContext(doc.Ctx)
+		if err := srv.Notify(doc.Ctx, "textDocument/publishDiagnostics", lsp.PublishDiagnosticsParams{
 			URI:         doc.URI,
 			Diagnostics: doc.Diagnostics,
 		}); err != nil {

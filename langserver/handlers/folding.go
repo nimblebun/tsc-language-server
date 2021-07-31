@@ -14,7 +14,7 @@ import (
 // "textDocument/foldingRange" method.
 func (mh *MethodHandler) TextDocumentFoldingRange(ctx context.Context, req *jrpc2.Request) ([]lsp.FoldingRange, error) {
 	var params lsp.FoldingRangeParams
-	err := req.UnmarshalParams(jrpc2.NonStrict(&params))
+	err := req.UnmarshalParams(&params)
 	if err != nil {
 		return []lsp.FoldingRange{}, err
 	}

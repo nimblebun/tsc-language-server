@@ -236,7 +236,7 @@ func (service *Service) Assigner() (jrpc2.Assigner, error) {
 }
 
 // Finish will terminate the service
-func (service *Service) Finish(status jrpc2.ServerStatus) {
+func (service *Service) Finish(_ jrpc2.Assigner, status jrpc2.ServerStatus) {
 	if status.Closed() || status.Err != nil {
 		service.logger.Printf("Session stopped (err: %v)", status.Err)
 	}

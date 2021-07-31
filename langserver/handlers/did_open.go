@@ -14,7 +14,7 @@ import (
 // method
 func (mh *MethodHandler) TextDocumentDidOpen(ctx context.Context, req *jrpc2.Request) error {
 	var params lsp.DidOpenTextDocumentParams
-	err := req.UnmarshalParams(jrpc2.NonStrict(&params))
+	err := req.UnmarshalParams(&params)
 	if err != nil {
 		return err
 	}

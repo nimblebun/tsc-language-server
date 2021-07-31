@@ -14,7 +14,7 @@ import (
 // "textDocument/didChange" method
 func (mh *MethodHandler) TextDocumentDidChange(ctx context.Context, req *jrpc2.Request) error {
 	var params lsp.DidChangeTextDocumentParams
-	err := req.UnmarshalParams(jrpc2.NonStrict(&params))
+	err := req.UnmarshalParams(&params)
 	if err != nil {
 		return err
 	}

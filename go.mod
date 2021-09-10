@@ -3,7 +3,7 @@ module pkg.nimblebun.works/tsc-language-server
 go 1.15
 
 require (
-	github.com/creachadair/jrpc2 v0.21.0
+	github.com/creachadair/jrpc2 v0.24.2
 	github.com/spf13/afero v1.4.1
 	github.com/urfave/cli/v2 v2.2.0
 	pkg.nimblebun.works/go-lsp v1.0.4

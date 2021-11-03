@@ -41,7 +41,7 @@ func New(ctx context.Context, sessionFactory session.Factory) *LanguageServer {
 
 // SetLogger will overwrite the current logger of the language server instance
 func (s *LanguageServer) SetLogger(logger *log.Logger) {
-	s.opts.Logger = logger
+	s.opts.Logger = jrpc2.StdLogger(logger)
 	s.logger = logger
 }
 
@@ -96,13 +96,12 @@ func (s *LanguageServer) StartTCP(addr string) error {
 	if err != nil {
 		return fmt.Errorf("Failed to start TCP server: %s", err)
 	}
-
+	acc := server.NetAccepter(listener, channel.LSP)
 	s.logger.Printf("TCP server running (%q)...", listener.Addr())
 
 	go func() {
 		s.logger.Println("Starting loop server...")
-		err = server.Loop(listener, s.newSevice, &server.LoopOptions{
-			Framing:       channel.LSP,
+		err = server.Loop(acc, s.newSevice, &server.LoopOptions{
 			ServerOptions: s.opts,
 		})
 

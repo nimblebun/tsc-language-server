@@ -9,9 +9,9 @@ func TestNew(t *testing.T) {
 	t.Run("should return the default configuration", func(t *testing.T) {
 		config := New()
 
-		// default config has 91 TSC command definitions
-		if len(config.TSC) != 91 {
-			t.Errorf("config.New(): got %v, want %v", len(config.TSC), 91)
+		// default config has 102 TSC command definitions
+		if len(config.TSC) != 102 {
+			t.Errorf("config.New(): got %v, want %v", len(config.TSC), 102)
 		}
 	})
 }
@@ -45,13 +45,13 @@ func TestGetTSCDefinition(t *testing.T) {
 		}
 
 		ok = definition.Label == targetDefinition.Label
-		ok = definition.Detail == targetDefinition.Detail
-		ok = definition.Documentation == targetDefinition.Documentation
-		ok = definition.Format == targetDefinition.Format
-		ok = definition.GetInsertText() == targetDefinition.InsertText
-		ok = definition.Nargs() == targetDefinition.Nargs()
-		ok = len(definition.ArgType) == len(targetDefinition.ArgType)
-		ok = definition.ArgType[0] == targetDefinition.ArgType[0]
+		ok = ok && definition.Detail == targetDefinition.Detail
+		ok = ok && definition.Documentation == targetDefinition.Documentation
+		ok = ok && definition.Format == targetDefinition.Format
+		ok = ok && definition.GetInsertText() == targetDefinition.InsertText
+		ok = ok && definition.Nargs() == targetDefinition.Nargs()
+		ok = ok && len(definition.ArgType) == len(targetDefinition.ArgType)
+		ok = ok && definition.ArgType[0] == targetDefinition.ArgType[0]
 
 		if !ok {
 			t.Errorf("config.Config#GetTSCDefinition(\"<AM-\") got %v, want %v", definition, targetDefinition)

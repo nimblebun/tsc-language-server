@@ -19,6 +19,33 @@ var DefaultConfig = []byte(`{
   },
 
   "tsc": {
+    "<2MV": {
+      "label": "<2MV",
+      "detail": "2nd player MoVe",
+      "documentation": "Move the other player next to the player who had executed the command (Switch).",
+      "format": "<2MV",
+      "insertText": "<2MV"
+    },
+    "<2PJ": {
+      "label": "<2PJ",
+      "detail": "2-Player Jump",
+      "documentation": "Jump to event X if in multiplayer mode (Switch).",
+      "format": "<2MVXXXX",
+      "insertText": "2PJ${1:0000}",
+      "argtype": [
+        "number"
+      ]
+    },
+    "<ACH": {
+      "label": "<ACH",
+      "detail": "ACHievement",
+      "documentation": "Trigger Steam achievement X. No-op in the EGS/Humble Bundle version of the game.",
+      "format": "<ACHXXXX",
+      "insertText": "ACH${1:0000}",
+      "argtype": [
+        "number"
+      ]
+    },
     "<AE+": {
       "label": "<AE+",
       "detail": "Arms Energy +",
@@ -278,6 +305,17 @@ var DefaultConfig = []byte(`{
         "direction"
       ]
     },
+    "<FF-": {
+      "label": "<FF-",
+      "detail": "First Flag - (false)",
+      "documentation": "Set first flag in range X-Y to false (Switch).",
+      "format": "<FF-XXXX:YYYY",
+      "insertText": "FF-${1:0000}:${2:0000}",
+      "argtype": [
+        "number",
+        "number"
+      ]
+    },
     "<FL+": {
       "label": "<FL+",
       "detail": "FLag +",
@@ -355,6 +393,13 @@ var DefaultConfig = []byte(`{
         "number"
       ]
     },
+    "<FR2": {
+      "label": "<FR2",
+      "detail": "FRee 2",
+      "documentation": "Free game action and PCs (Switch multiplayer).",
+      "format": "<FR2",
+      "insertText": "FR2"
+    },
     "<FRE": {
       "label": "<FRE",
       "detail": "FREe",
@@ -372,6 +417,13 @@ var DefaultConfig = []byte(`{
         "item"
       ]
     },
+    "<HM2": {
+      "label": "<HM2",
+      "detail": "Hide My character 2",
+      "documentation": "Hide the player who executed the event (Switch).",
+      "format": "<HM2",
+      "insertText": "HM2"
+    },
     "<HMC": {
       "label": "<HMC",
       "detail": "Hide My Character",
@@ -385,6 +437,18 @@ var DefaultConfig = []byte(`{
       "documentation": "Reset memory and restart game.",
       "format": "<INI",
       "insertText": "INI"
+    },
+    "<INJ": {
+      "label": "<INJ",
+      "detail": "Item Number Jump",
+      "documentation": "Jump to event Z if amount of item X equals Y (Switch).",
+      "format": "<INJXXXX:YYYY:ZZZZ",
+      "insertText": "INJ${1:0000}:${2:0000}:${3:0000}",
+      "argtype": [
+        "item",
+        "number",
+        "number"
+      ]
     },
     "<INP": {
       "label": "<INP",
@@ -428,6 +492,24 @@ var DefaultConfig = []byte(`{
         "item",
         "number"
       ]
+    },
+    "<I+N": {
+      "label": "<I+N",
+      "detail": "Item + N",
+      "documentation": "Adds item X with maximum amount of Y (Switch).",
+      "format": "<I+NXXXX:YYYY",
+      "insertText": "I+N${1:0000}:${2:0000}",
+      "argtype": [
+        "item",
+        "number"
+      ]
+    },
+    "<KE2": {
+      "label": "<KE2",
+      "detail": "KEY lock for multiplayer",
+      "documentation": "Lock player controls and hide status bars until <END (Switch multiplayer).",
+      "format": "<KE2",
+      "insertText": "KE2"
     },
     "<KEY": {
       "label": "<KEY",
@@ -597,12 +679,29 @@ var DefaultConfig = []byte(`{
         "number"
       ]
     },
+    "<POP": {
+      "label": "<POP",
+      "detail": "POP text script state",
+      "documentation": "Restore text script state from stack and resume previous event (Switch).",
+      "format": "<POP",
+      "insertText": "POP"
+    },
     "<PRI": {
       "label": "<PRI",
       "detail": "PRevent Interaction",
       "documentation": "Lock player controls and freeze game action until KEY or END.",
       "format": "<PRI",
       "insertText": "PRI"
+    },
+    "<PSH": {
+      "label": "<PSH",
+      "detail": "PuSH text script state",
+      "documentation": "Push the current script state onto the stack and start event X (Switch).",
+      "format": "<PSHXXXX",
+      "insertText": "PSH${1:0000}",
+      "argtype": [
+        "number"
+      ]
     },
     "<PS+": {
       "label": "<PS+",

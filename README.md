@@ -37,6 +37,20 @@ are always attached so you can verify the integrity after download. Placing the
 binary somewhere in your PATH means that language clients will be able to use it
 without any additional steps.
 
+### For Debian users
+
+If you have a Debian or Debian-based system, you can use our Debian package
+repository to install and update the TSC Language Server globally.
+
+Run the following commands in succession:
+
+```sh
+echo "deb https://deb.nimblebun.works/debian stable main" | sudo tee /etc/apt/sources.list.d/nimblebun.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 033D0D4895F432D1
+sudo apt update
+sudo apt install tsc-ls
+```
+
 ## Usage
 
 You can start the server in one of two modes:
@@ -57,20 +71,20 @@ in your favorite code editor/IDE in [GUIDES.md][language-client-guides].
 The TSC language server exposes the following LSP-specific JSON-RPC methods:
 
 - `textDocument/didOpen` - adds the opened document to the language server's
-file handler
+  file handler
 - `textDocument/didClose` - removes the document from the language server's file
-handler
+  handler
 - `textDocument/didChange` - updates the document in the language server's file
-handler and sends error/warning diagnostics to the client
+  handler and sends error/warning diagnostics to the client
 - `textDocument/completion` - sends a list of TSC commands that can be used from
-within the editor's autocompletion feature
+  within the editor's autocompletion feature
 - `textDocument/documentSymbol` - sends a list of TSC events that can be found
-in the opened file
+  in the opened file
 - `textDocument/foldingRange` - sends a list of event ranges that can be used
-for folding
+  for folding
 - `textDocument/hover` - provides hover information for commands and events
 - `tsc/setConfig` - updates the LSP's default configuration with overrides from
-the workspace's `.tscrc.json` file
+  the workspace's `.tscrc.json` file
 - `tsc/resetConfig` - reverts to the LSP's built-in (standard) TSC configuration
 
 Additionally, some required methods are also exposed, such as `initialize`,
@@ -79,10 +93,10 @@ Additionally, some required methods are also exposed, such as `initialize`,
 ## Credits
 
 - [Studio Pixel][studio-pixel] and [Nicalis][nicalis] for Cave Story and the TSC
-scripting format
+  scripting format
 - The [Terraform Language Server][terraform-ls] for inspiring a big part of this
-project's structure and inner workings (seriously guys, you did a phenomenal
-job!)
+  project's structure and inner workings (seriously guys, you did a phenomenal
+  job!)
 
 ## License
 

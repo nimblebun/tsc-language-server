@@ -39,7 +39,7 @@ without any additional steps.
 
 ### For Debian users
 
-If you have a Debian or Debian-based system, you can use our Debian package
+If you have Debian or a Debian-based system, you can use our Debian package
 repository to install and update the TSC Language Server globally.
 
 Run the following commands in succession:
@@ -49,6 +49,17 @@ echo "deb https://deb.nimblebun.works/debian stable main" | sudo tee /etc/apt/so
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 033D0D4895F432D1
 sudo apt update
 sudo apt install tsc-ls
+```
+
+### For Arch Linux users
+
+If you have Arch Linux or an Arch-based system (e.g. Manjaro), you can install
+the TSC Language Server globally through [AUR][aur-link].
+
+Example using `yay`:
+
+```sh
+yay -S tsc-ls
 ```
 
 ## Usage
@@ -108,3 +119,4 @@ Additionally, some required methods are also exposed, such as `initialize`,
 [nicalis]: https://www.nicalis.com/
 [terraform-ls]: https://github.com/hashicorp/terraform-ls
 [language-client-guides]: https://github.com/nimblebun/tsc-language-server/blob/master/GUIDES.md
+[aur-link]: https://aur.archlinux.org/packages/tsc-ls
